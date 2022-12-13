@@ -1,6 +1,8 @@
 import Usuario from "../models/usuarioModels.js";
+import bcrypt from "bcrypt"
 
-async function leerUsuario(req, res) {
+async function leerUsuario (req,res) {
+//exports.leerUsuario = async (req, res ) => {
     try{
         const usuario = await Usuario.find();
         res.json({usuario});
@@ -9,17 +11,24 @@ async function leerUsuario(req, res) {
     }   
 }
 
-async function crearUsuario(req, res) {
+async function crearUsuario (req,res) {
+    const { password, email} = req.body;  
     
-    const {email, password, tipoUsuario} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    //const passwordCrypt = await bcrypt.hash(password,salt);
 
     try{
+        //verificar si el correo ya existe
         let usuario = await Usuario.findOne({email});
         if (usuario){
-            return res.status(400).json({msg:" El usuario ya existe"});
+            return res.status(400).json({msg:"El usuario ya existe"});
         }
         
+
         usuario = new Usuario(req.body);
+         //hash
+         usuario.password = await bcrypt.hash(password, salt);
+
         const usuarioGuardado = await usuario.save();
         res.json(usuarioGuardado);
 
@@ -29,7 +38,8 @@ async function crearUsuario(req, res) {
     
 }
 
-async function actualizarUsuario(req, res ) {
+async function actualizarUsuario (req,res) {
+//exports.actualizarUsuario = async (req, res ) => {
     const {id} = req.params;
     const usuario = await Usuario.findById(id);
 
@@ -41,12 +51,14 @@ async function actualizarUsuario(req, res ) {
     usuario.nombre = req.body.nombre || usuario.nombre;
     usuario.password = req.body.password || usuario.password;
     usuario.email = req.body.email || usuario.email;
-    usuario.tipoUsuario =req.body.tipoUsuario || usuario.tipoUsuario;
+    usuario.estado =req.body.estado || usuario.estado;
     usuario.save();
+    usuario.password = await bcryptjs.hash(usuario.password, 10);  //verificar si es igual password nuevo = encriptado
     res.json({usuario});
 }
 
-async function borrarUsuario(req, res ) {
+async function borrarUsuario (req,res) {
+//exports.borrarUsuario = async (req, res ) => {
     const {id} = req.params;
     const usuario = await Usuario.findById(id);
 
