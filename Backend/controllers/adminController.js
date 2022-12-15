@@ -23,6 +23,7 @@ async function crearAdmin (req,res) {
         }
         
         admin = new Admin(req.body);
+        admin.creador = req.usuario.id || admin.creador;
         const adminGuardado = await admin.save();
         res.json(adminGuardado);
 

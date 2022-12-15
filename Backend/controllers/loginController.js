@@ -38,14 +38,14 @@ async function login(req, res) {
         // Si las validaciones son correctas entonces crear el token
 
         let token = {
-           usuario: {id : usuario.id},
+           usuario: {id : usuario.id},   //Se captura el ID que es donde se va  afirmar con el token
         };
 
          jwt.sign(
            token,
-           process.env.CRYPT,
+           process.env.CRYPT,   //Se asocia el token a una variable de entorno (Seguridad)
            {
-               expiresIn: '30d', //Tiempo de expriracion del token
+               expiresIn: "30d", //Tiempo de expriracion del token
            },
            (error, token) =>{
                if (error) throw error;

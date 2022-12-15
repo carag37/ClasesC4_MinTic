@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 export default ( req, res, next) =>{
     //leer el token desde header de postman
     const  token  = req.header("x-auth-token");
-    //const token = req.header("x-auth-token");
+    
     //console.log(token);
 
     // revisar si hay token 

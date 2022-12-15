@@ -1,6 +1,7 @@
 import MateriaSchema from "../models/materiaModels.js";
 import CursoSchema from "../models/cursoModels.js";
 import DocenteSchema from "../models/docenteModels.js";
+import { usuarioAutenticado } from "./loginController.js";
 
 //--------------------------CREATE--------------------------------------------
 
@@ -45,6 +46,7 @@ async function crearMateria(req, res) {
             "nombre": nombre,
             "curso": idCurso,
             "docente": idDocente,
+            "creador": req.usuario.id
 
         })
     } catch (error) {

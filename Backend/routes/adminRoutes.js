@@ -5,14 +5,15 @@
 import express from "express";
 const router = express.Router();
 import { leerAdmin, crearAdmin, actualizarAdmin, borrarAdmin } from "../controllers/adminController.js"; 
+import loginMiddleware from "../middleware/loginMiddleware.js";
 
-router.get("/", leerAdmin);
+router.get("/", loginMiddleware, leerAdmin);
 
-router.post( "/", crearAdmin);
+router.post( "/", loginMiddleware, crearAdmin);
 
-router.patch("/:id", actualizarAdmin);
+router.patch("/:id", loginMiddleware, actualizarAdmin);
 
-router.delete("/:id", borrarAdmin);
+router.delete("/:id", loginMiddleware, borrarAdmin);
 
 //module.exports = router;
 export default router;

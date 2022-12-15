@@ -19,7 +19,7 @@ async function crearUsuario (req,res) {
 
     try{
         //verificar si el correo ya existe
-        let usuario = await Usuario.findOne({email});
+        let usuario = await Usuario.findOne({ email });
         if (usuario){
             return res.status(400).json({msg:"El usuario ya existe"});
         }
@@ -28,7 +28,7 @@ async function crearUsuario (req,res) {
         usuario = new Usuario(req.body);
          //hash
          usuario.password = await bcrypt.hash(password, salt);
-
+        
         const usuarioGuardado = await usuario.save();
         res.json(usuarioGuardado);
 

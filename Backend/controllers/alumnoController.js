@@ -29,6 +29,7 @@ async function crearAlumno (req,res) {
             }*/
             
             const alumno = new Alumno(req.body);
+            alumno.creador = req.usuario.id || alumno.creador;
            // res.json(alumno);
             const alumnoGuardado = await alumno.save();
             res.json(alumnoGuardado);

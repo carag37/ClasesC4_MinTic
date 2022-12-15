@@ -23,6 +23,7 @@ async function crearAcudiente (req,res) {
         }
         
         acudiente = new Acudiente(req.body);
+        acudiente.creador = req.usuario.id || acudiente.creador;
         const acudienteGuardado = await acudiente.save();
         res.json(acudienteGuardado);
 
