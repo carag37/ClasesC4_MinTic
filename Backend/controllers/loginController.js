@@ -10,6 +10,7 @@ import { config } from "dotenv";
 async function login(req, res) {
 
     const { email, password } = req.body;
+    
     config({ path: "variables.env"}); //funcion que llama al archivo de las variables de entorno
     
     
@@ -17,9 +18,9 @@ async function login(req, res) {
         // revisar que el correo exista
         let usuario = await Usuario.findOne({email});
         
-        if (usuario==null || password == null){
-            res.sendStatus(401);
-            return;
+        if (email=="" || password == ""){
+            return res.status(401).json({ msg : "Se deben diligenciar ambos campos"});
+            
         }
 
         if (!usuario){

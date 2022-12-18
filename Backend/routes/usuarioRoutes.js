@@ -13,7 +13,9 @@ import { leerUsuario, crearUsuario, actualizarUsuario, borrarUsuario } from "../
 
 router.get("/", loginMiddleware, leerUsuario);
 
-router.post( "/", loginMiddleware, crearUsuario);
+//router.post( "/", loginMiddleware, crearUsuario);
+router.post( "/", crearUsuario);
+
 
 router.patch("/:id", loginMiddleware, actualizarUsuario);
 

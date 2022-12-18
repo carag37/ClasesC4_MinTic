@@ -22,13 +22,16 @@ import boletinRoutes from "./routes/boletinRoutes.js";
 //     }
 // })
 
-
+//crear la app como express
 const app = express();
 
+//conecto la base de datos
 conectarDB();
 
+//Defino el puerto de conexión de la DB
 const port = process.env.PORT || 4000
 
+//Escucho el puerto
 app.listen(port, ()=>{
     console.log("El servidor está ejecutandose correctamente en el puerto:" +port);
 });
