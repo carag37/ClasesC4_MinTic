@@ -50,7 +50,7 @@ class crud{
         }
 
         const url= `${back.api.baseURL}${resource}`
-        //console.log(url);
+       // console.log(url);
         let response = (await (await fetch(url,data)).json())
         return response;
     }
@@ -63,10 +63,30 @@ class crud{
         } else {
             bearer = `${token}`;
         }
-        
-        
         const data = {
             method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type':'application/json',
+                'x-auth-token': bearer
+            }
+        }
+        const url = `${back.api.baseURL}${resource}`
+        let response = (await (await fetch(url, data)).json())
+        return response
+        
+    }
+
+    async PATCH(resource,body){
+        const token = localStorage.getItem("token");
+        let bearer;
+        if(token ===""){
+            bearer = "";
+        } else {
+            bearer = `${token}`;
+        }
+        const data = {
+            method: 'PATCH',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type':'application/json',

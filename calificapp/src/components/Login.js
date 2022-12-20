@@ -124,14 +124,22 @@ function Login() {
                             className="bg-blue-600 mb-3 text-2xl w-full p-2 border rounded-lg hover:cursor-pointer hover:bg-blue-500 text-slate-200 font-bold uppercase"
                         />
 
-                        <Link className="text-slate-600 mb-3 hover:text-slate-500 block text-center text-sm font-bold uppercase" to={"/crear-cuenta"}>Crear Cuenta</Link>
+                        
+                        <Link  
+                            className="text-slate-600 mb-3 hover:text-slate-500 block text-center text-sm font-bold uppercase" 
+                            to={"/crear-inicio"}>
+                            Crear Cuenta
+                        </Link>
 
                         <Link to={"/cambiar-clave"}
                             className="text-slate-600 mb-3 hover:text-slate-500 block text-center text-sm font-bold uppercase"
-                        >Cambiar Contraseña</Link>
+                            >Cambiar Contraseña
+                        </Link>
 
-
-                        <Link className="text-slate-600 mb-3 hover:text-slate-500 block text-center text-sm font-bold uppercase" to={"/"}>Regresar</Link>
+                        <Link 
+                            className="text-slate-600 mb-3 hover:text-slate-500 block text-center text-sm font-bold uppercase" 
+                            to={"/login"}>Regresar
+                        </Link>
 
 
 
